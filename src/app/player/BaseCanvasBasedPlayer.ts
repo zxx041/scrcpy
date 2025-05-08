@@ -158,6 +158,8 @@ export abstract class BaseCanvasBasedPlayer extends BasePlayer {
     }
 
     protected initCanvas(width: number, height: number): void {
+        console.log("init canvas...");
+
         if (this.canvas) {
             const parent = this.tag.parentNode;
             if (parent) {

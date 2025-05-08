@@ -40,6 +40,7 @@ export class MsePlayer extends BasePlayer {
             tag.id = id;
         }
         tag.className = 'video-layer';
+        // debugger
         return tag;
     }
 

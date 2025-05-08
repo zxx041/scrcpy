@@ -345,6 +345,9 @@ export class StreamClientScrcpy
         streamReceiver.on('displayInfo', this.onDisplayInfo);
         streamReceiver.on('disconnected', this.onDisconnected);
         console.log(TAG, player.getName(), udid);
+
+        // @ts-ignore
+        window.__zcxWsScrcpy_video = video;
     }
 
     public sendMessage(message: ControlMessage): void {

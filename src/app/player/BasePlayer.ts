@@ -113,6 +113,7 @@ export abstract class BasePlayer extends TypedEmitter<PlayerEvents> {
         super();
         this.touchableCanvas = document.createElement('canvas');
         this.touchableCanvas.className = 'touch-layer';
+        this.touchableCanvas.id = '__zcxWsScrcpy_touchCanvasId';
         this.touchableCanvas.oncontextmenu = function (event: MouseEvent): void {
             event.preventDefault();
         };
@@ -377,6 +378,7 @@ export abstract class BasePlayer extends TypedEmitter<PlayerEvents> {
     }
 
     public setScreenInfo(screenInfo: ScreenInfo): void {
+        // debugger
         if (this.needScreenInfoBeforePlay()) {
             this.pause();
         }

@@ -95,6 +95,7 @@ export abstract class InteractionHandler {
     }
 
     protected abstract onInteraction(event: MouseEvent | TouchEvent): void;
+
     protected abstract onKey(event: KeyboardEvent): void;
 
     protected static bindGlobalListeners(interactionHandler: InteractionHandler): void {
@@ -209,7 +210,15 @@ export abstract class InteractionHandler {
     protected static buildTouchOnClient(event: CommonTouchAndMouse, screenInfo: ScreenInfo): TouchOnClient | null {
         const action = this.mapTypeToAction(event.type);
         const { width, height } = screenInfo.videoSize;
-        const target: HTMLElement = event.target as HTMLElement;
+
+        let target: HTMLElement;
+        // const target: HTMLElement = event.target as HTMLElement;
+        if ((event as any).__zcxWsScrcpy_fakeEvent) {
+            target = (event as any).__zcxWsScrcpy_fakeEventTarget;
+        } else {
+            target = event.target as HTMLElement;
+        }
+
         const rect = target.getBoundingClientRect();
         let { clientWidth, clientHeight } = target;
         let touchX = event.clientX - rect.left;
@@ -247,6 +256,7 @@ export abstract class InteractionHandler {
         if (x < 0 || y < 0 || x > width || y > height) {
             invalid = true;
         }
+        invalid = false;
         return {
             client: {
                 width: clientWidth,
@@ -278,6 +288,7 @@ export abstract class InteractionHandler {
                 messages.push(message);
             }
         } else if (action === MotionEvent.ACTION_DOWN) {
+            console.log('mouseodwn.. event... ', message);
             if (previous) {
                 console.warn(logPrefix, 'Received ACTION_DOWN while already has one stored');
             } else {

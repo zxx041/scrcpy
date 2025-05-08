@@ -63,7 +63,20 @@ export class FeaturedInteractionHandler extends InteractionHandler {
         let messages: ControlMessage[];
         let storage: Map<number, TouchControlMessage>;
         if (event instanceof MouseEvent) {
-            if (event.target !== this.tag) {
+
+            // 特判
+            let fakeEvent = false;
+            if (event.target !== this.tag && this.tag.tagName === 'CANVAS' && (window as any).__zcxWsScrcpy_canvasRect) {
+                let canvasRect = (window as any).__zcxWsScrcpy_canvasRect;
+                if (event.clientX >= canvasRect.left && event.clientY >= canvasRect.top
+                    && event.clientX <= canvasRect.right && event.clientY <= canvasRect.bottom) {
+                    fakeEvent = true;
+                    (event as any).__zcxWsScrcpy_fakeEvent = true;
+                    (event as any).__zcxWsScrcpy_fakeEventTarget = this.tag;
+                }
+            }
+
+            if (event.target !== this.tag && fakeEvent !== true) {
                 return;
             }
             if (window['WheelEvent'] && event instanceof WheelEvent) {
