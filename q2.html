@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <div style="position: relative;">
+        <iframe id="ff" width="700" height="700" src="http://127.0.0.1:8000/#!action=stream&udid=8XV5T15A20016096&player=tinyh264&ws=ws%3A%2F%2F127.0.0.1%3A8000%2F%3Faction%3Dproxy-adb%26remote%3Dtcp%253A8886%26udid%3D8XV5T15A20016096">
+        </iframe>
+        <div id="a" style="position: absolute; width: 700px; height: 700px; left: 0; top: 0; opacity: 0.2; background-color: blue;"></div>
+    </div>
+
+    <script type="text/javascript">
+        var a = document.getElementById("a");
+
+        let ff = document.getElementById('ff');
+        const iframeWindow = ff.contentWindow;
+
+        a.addEventListener('mousedown', function(e){
+            console.log('mousedown', e);
+
+            // 在父窗口监听事件
+            iframeWindow.document.dispatchEvent(new MouseEvent('mousedown', {
+                clientX: e.clientX,
+                clientY: e.clientY,
+                // 其他需要的属性
+            }));
+
+        })
+        a.addEventListener('mousemove', function(e){
+            console.log('mousemove', e);
+            // 在父窗口监听事件
+            iframeWindow.document.dispatchEvent(new MouseEvent('mousemove', {
+                clientX: e.clientX,
+                clientY: e.clientY,
+                // 其他需要的属性
+            }));
+        })
+        a.addEventListener('mouseup', function(e){
+            console.log('mouseup', e);
+            // 在父窗口监听事件
+            iframeWindow.document.dispatchEvent(new MouseEvent('mouseup', {
+                clientX: e.clientX,
+                clientY: e.clientY,
+                // 其他需要的属性
+            }));
+        })
+
+
+    </script>
+</body>
+</html>

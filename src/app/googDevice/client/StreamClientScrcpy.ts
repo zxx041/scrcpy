@@ -43,8 +43,7 @@ const TAG = '[StreamClientScrcpy]';
 
 export class StreamClientScrcpy
     extends BaseClient<ParamsStreamScrcpy, never>
-    implements KeyEventListener, InteractionHandlerListener
-{
+    implements KeyEventListener, InteractionHandlerListener {
     public static ACTION = 'stream';
     private static players: Map<string, PlayerClass> = new Map<string, PlayerClass>();
 
@@ -325,7 +324,9 @@ export class StreamClientScrcpy
         player.setParent(video);
         player.pause();
 
-        document.body.appendChild(deviceView);
+        if ((window as any).__zcxWsScrcpy_DEBUG === true) {
+            document.body.appendChild(deviceView);
+        }
         if (fitToScreen) {
             const newBounds = this.getMaxSize();
             if (newBounds) {
