@@ -213,7 +213,7 @@ Currently, support of WebSocket protocol added to v1.19 of scrcpy
 [adbkit]: https://github.com/DeviceFarmer/adbkit
 [xterm.js]: https://github.com/xtermjs/xterm.js
 [tinyh264]: https://github.com/udevbe/tinyh264
-[node-pty]: https://github.com/Tyriar/node-pty
+//[node-pty]: https://github.com/Tyriar/node-pty
 [WebDriverAgent]: https://github.com/appium/WebDriverAgent
 [qvh]: https://github.com/danielpaulus/quicktime_video_hack
 [ws-qvh]: https://github.com/NetrisTV/ws-qvh
