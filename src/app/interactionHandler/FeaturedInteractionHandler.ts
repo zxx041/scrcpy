@@ -66,13 +66,16 @@ export class FeaturedInteractionHandler extends InteractionHandler {
 
             // 特判
             let fakeEvent = false;
-            if (event.target !== this.tag && this.tag.tagName === 'CANVAS' && (window as any).__zcxWsScrcpy_canvasRect) {
-                let canvasRect = (window as any).__zcxWsScrcpy_canvasRect;
-                if (event.clientX >= canvasRect.left && event.clientY >= canvasRect.top
-                    && event.clientX <= canvasRect.right && event.clientY <= canvasRect.bottom) {
-                    fakeEvent = true;
-                    (event as any).__zcxWsScrcpy_fakeEvent = true;
-                    (event as any).__zcxWsScrcpy_fakeEventTarget = this.tag;
+            let disableFakeEvent = (window as any).__zcxWsScrcpy_disableFakeEvent;
+            if (disableFakeEvent == undefined || !disableFakeEvent) {
+                if (event.target !== this.tag && this.tag.tagName === 'CANVAS' && (window as any).__zcxWsScrcpy_canvasRect) {
+                    let canvasRect = (window as any).__zcxWsScrcpy_canvasRect;
+                    if (event.clientX >= canvasRect.left && event.clientY >= canvasRect.top
+                        && event.clientX <= canvasRect.right && event.clientY <= canvasRect.bottom) {
+                        fakeEvent = true;
+                        (event as any).__zcxWsScrcpy_fakeEvent = true;
+                        (event as any).__zcxWsScrcpy_fakeEventTarget = this.tag;
+                    }
                 }
             }
 
