@@ -64,12 +64,13 @@ export class FeaturedInteractionHandler extends InteractionHandler {
         let storage: Map<number, TouchControlMessage>;
         if (event instanceof MouseEvent) {
 
-            // 特判
+            // 是否穿透 即 屏幕点击后是否 触发手机也发生对应变化
             let fakeEvent = false;
             let disableFakeEvent = (window as any).__zcxWsScrcpy_disableFakeEvent;
             if (disableFakeEvent == undefined || !disableFakeEvent) {
-                if (event.target !== this.tag && this.tag.tagName === 'CANVAS' && (window as any).__zcxWsScrcpy_canvasRect) {
-                    let canvasRect = (window as any).__zcxWsScrcpy_canvasRect;
+                let canvas = document.getElementById("__zcxWsScrcpy_touchCanvasId")
+                if (event.target !== this.tag && this.tag.tagName === 'CANVAS' && canvas) {
+                    let canvasRect = canvas.getBoundingClientRect();
                     if (event.clientX >= canvasRect.left && event.clientY >= canvasRect.top
                         && event.clientX <= canvasRect.right && event.clientY <= canvasRect.bottom) {
                         fakeEvent = true;

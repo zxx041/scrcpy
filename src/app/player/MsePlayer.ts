@@ -24,7 +24,7 @@ export class MsePlayer extends BasePlayer {
         bitrate: 14680064,
         maxFps: 60,
         iFrameInterval: 10,
-        bounds: new Size(360, 780),
+        bounds: new Size(780, 780),
         sendFrameMeta: false,
     });
     private static DEFAULT_FRAMES_PER_FRAGMENT = 1;

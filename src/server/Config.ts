@@ -4,8 +4,8 @@ import * as path from 'path';
 import { Configuration, HostItem, ServerItem } from '../types/Configuration';
 import { EnvName } from './EnvName';
 import YAML from 'yaml';
-
-const DEFAULT_PORT = 8000;
+// 端口写死为 29418
+const DEFAULT_PORT = 29418;
 
 const YAML_RE = /^.+\.(yaml|yml)$/i;
 const JSON_RE = /^.+\.(json|js)$/i;
